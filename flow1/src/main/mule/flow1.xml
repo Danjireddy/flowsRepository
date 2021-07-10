@@ -25,6 +25,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		</choice>
 		<logger level="INFO" doc:name="Logger" doc:id="f7e81fa0-1055-4134-a433-ab6209735ca9" message="end flow"/>
 		<logger level="INFO" doc:name="Logger" doc:id="81b88a9a-d407-4b21-b7e1-9ebdd3f98f24" message="slleleel"/>
+		<logger level="INFO" doc:name="Logger" doc:id="7f5228a5-b998-483a-b698-1581775c25bd" message="ssss"/>
 	</flow>
 	<flow name="MainFlow" doc:id="ad9ed507-971a-438c-85bf-10dc2b2854ce" >
 		<http:listener doc:name="Listener" doc:id="1a526f72-9449-4931-a186-f884b57ef200" config-ref="HTTP_Listener_config" path="/path"/>
