@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="3cc70b29-42b1-479c-820a-f6dd8ccc473a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="flow1Flow" doc:id="d408639f-f5f9-4107-92fc-3c6e4bbe5dba" >
+		<scheduler doc:name="Scheduler" doc:id="f41d12b9-f8a2-4e00-a605-e5d3a973ad6d" >
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="MINUTES"/>
+			</scheduling-strategy>
+		</scheduler>
+		<logger level="INFO" doc:name="Logger" doc:id="2b3caa10-67c9-460d-9883-810b71d55125" message="flow started:::::::::::::::::;;"/>
+		<set-variable value="#['ashok']" doc:name="Set Variable" doc:id="5f992a0c-a2d5-4a72-b7d6-02da05770469" variableName="Name"/>
+		<choice doc:name="Choice" doc:id="12a703bc-7e3a-48b6-a3f9-a5464536da0c" >
+			<when expression="#[vars.Name =='ashoksss']">
+				<logger level="INFO" doc:name="Logger" doc:id="fe1bed99-fe87-4057-a4a6-b4c94f2f418b" message="sucess path:::::::::::::::::::::::::"/>
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Logger" doc:id="9c0f785c-813a-40c2-ac78-72bcea964869" message="Failure path"/>
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="MainFlow" doc:id="ad9ed507-971a-438c-85bf-10dc2b2854ce" >
+		<http:listener doc:name="Listener" doc:id="1a526f72-9449-4931-a186-f884b57ef200" config-ref="HTTP_Listener_config" path="/path"/>
+		<logger level="INFO" doc:name="Logger" doc:id="92e50ced-51d4-4457-817b-b60e8518eb9a" message="#[payload]"/>
+		<choice doc:name="check payload" doc:id="d897b5bf-b6dc-49a0-8fc7-2dbdebbcc354" >
+			<when expression="#[payload ==null]">
+				<logger level="INFO" doc:name="Logger" doc:id="894c8104-69da-4163-b3be-e17874e97ea4" message="sucess::::::::::::::; #[payload]"/>
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Logger" doc:id="0e399254-802e-4848-87fc-764d22a56632" message="Failure Path"/>
+			</otherwise>
+		</choice>
+	</flow>
+</mule>
